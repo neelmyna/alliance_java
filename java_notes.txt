@@ -1,0 +1,44 @@
+STEPS TO CREATE PERSONAL ACCESS TOKEN (PAT)
+
+Sign in to your github
+Click on profile Picture (Profile buttun) -> Top right corner
+Scroll down and Click Settings
+On LHS of the new screen, scroll down and Click Developer Settings
+On top LHS of the new screen Click PAT
+Select tokens Classic
+On Mid of the Screen, on the Top, Click Generate new TOKEN
+Select Token Classic
+Add a suitable Note
+Expiration: NO Expiration
+Leave the other things as it is, scroll down and Click Generate Token
+
+Now, copy the Token and mail it to yourself. Or WhatsApp it to yourself. See that it is safely available to you always.
+
+
+https://github.com/neelmyna/alliance_java
+
+git clone https://ghp_M1122h1jSHuF6Ly1234yll8yqV0g41L2tPfZ6@github.com/neelmyna/alliance_java
+---------------------------------------
+public void myFunction() {
+	Student student = new Student();
+	
+	int array[10];
+	int[] array = new int[10];
+	int[] array = new int[userSize];
+}
+---------------------------------------
+public void myFunction() {
+	Student student1 = new Student();
+	Student student1 = new Student(101, "nithin", "comp-sc", 89.5f, 7, 9988554477L);
+	Student student3 = new Student(s2);
+}
+---------------------------------------
+CRUD operations RESTful API End Points
+	findById() // get/id // select * from students where id = ?
+	findAll() // get // select * from students
+	create() // post // insert into students.....
+	findBnyIdAndDelete() // delete // delete from students where id = ?
+	findBnyIdAndUpdate() // put // update students set ? = ? where id = ?
+---------------------------------------
+
+

@@ -1,8 +1,9 @@
 package day1;
 
 import java.util.Objects;
+import java.util.Scanner;
 
-public class Student extends Object {
+public class Student {
 	private static int generateId = 1;
 	private int id;
 	private String name;
@@ -28,7 +29,8 @@ public class Student extends Object {
 
 	public Student(int id, String name, String branch, float averageScore, byte semester, long phoneNumber) {
 		super();
-		this.id = id;
+		this.id = Student.generateId;
+		generateId++;
 		this.name = name;
 		this.branch = branch;
 		this.averageScore = averageScore;
@@ -102,7 +104,7 @@ public class Student extends Object {
 	public int hashCode() {
 		return Objects.hash(averageScore, branch, id, name, phoneNumber, semester);
 	}
-
+	// student2.equals(student3)
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -116,13 +118,5 @@ public class Student extends Object {
 				&& Objects.equals(branch, other.branch) && id == other.id && Objects.equals(name, other.name)
 				&& phoneNumber == other.phoneNumber && semester == other.semester;
 	}
-	
-	public static void main(String[] args) {
-		for(int i = 0; i < args.length; i++) {
-			System.out.print(args[i] + "   ");
-		}
-		System.out.println(args[0] instanceof String);
-		System.out.println(Integer.parseInt(args[1]) instanceof String);
-	}
-
 }
+
