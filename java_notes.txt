@@ -517,4 +517,159 @@ TREES
 > The above statement, makes it very easy to solve any problem like adding or deleting a node in the tree.
 > That is, we define the logic for only 3 nodes, namely the root, left and right child nodes. And this can be RECURSIVELY applied to the entire tree.
 Traversals:
-> 
+> If we access the nodes of the BT/BST in the order LR'R, then the traversal is said to be INORDER traversal.
+> When we traverse a BST in Inorder traversal, then we get the elements sorted manner (ascending order).
+> When we traverse the tree in the order R'LR then the traversal is said to be PREORDER traversal.
+> When we traverse the tree in the order LRR' then the traversal is said to be POSTORDER traversal.
+> Given the inorder and preorder traversals or the inorder and postorder traversals, we can build the BST.
+> If the BST is balanced, then in the inorder traversal, we can observe the Root falls at mid of the list of the nodes.
+> In preorder the Root always comes 1st.
+> In the post order, the Root always comes last.
+----------------------------------------------------------
+
+public class Node {
+	private Node left;
+	private int data;
+	private Node right;
+	private static Scanner scanner;
+	
+	static {
+		scanner = new Scanner(System.in);
+	}
+	
+	public static Scanner getScanner() {
+		return scanner;
+	}
+	
+	public static void closeScanner() {
+		scanner.close();
+	}
+	
+	public Node() {
+		super();
+		System.out.print("Enter data of the new Node: ");
+		data = scanner.nextInt();
+	}
+
+	public Node(Node left, int data, Node right) {
+		super();
+		this.left = left;
+		this.data = data;
+		this.right = right;
+	}
+
+	public Node getLeft() {
+		return left;
+	}
+
+	public void setLeft(Node left) {
+		this.left = left;
+	}
+
+	public int getData() {
+		return data;
+	}
+
+	public void setData(int data) {
+		this.data = data;
+	}
+
+	public Node getRight() {
+		return right;
+	}
+
+	public void setRight(Node right) {
+		this.right = right;
+	}
+
+	@Override
+	public String toString() {
+		return "Node [left=" + left + ", data=" + data + ", right=" + right + "]";
+	}
+}
+--------------------------
+
+public class BST {
+
+	private Node root; // this holds reference value of the root node. Thus it points to the BST
+
+	public void addNode() {
+		Node newNode = new Node();
+		
+		if(root == null) { // if tree is empty, then the new-node becomes root of the root
+			root = newNode;
+			return;
+		}
+		// if the tree is not empty, then we must traverse the tree in the proper path and attach the new node as leaf node.
+		Node temp1 = root;
+		Node temp2 = null;
+		while(temp1 != null) {
+			temp2 = temp1;
+			if(newNode.getData() < temp1.getData())
+				temp1 = temp1.getLeft();
+			else
+				temp1 = temp1.getRight();
+		}
+		if(newNode.getData() < temp2.getData())
+			temp2.setLeft(newNode);
+		else
+			temp2.setRight(newNode);
+	}
+	
+	public void addNodeRecursively(Node root, Node newNode) {
+		if(root == null) {
+			root = newNode;
+			return;
+		}
+		if(newNode.getData() < root.getData())
+			addNodeRecursively(root.getLeft(), newNode);
+		else
+			addNodeRecursively(root.getRight(), newNode);
+	}
+
+	public void preOrder(Node root) {
+		if(root != null) {
+			System.out.print(root.getData() + "  ");
+			preOrder(root.getLeft());
+			preOrder(root.getRight());
+		}
+	}
+
+	public void inOrder(Node root) {
+		if(root != null) {
+			inOrder(root.getLeft());
+			System.out.print(root.getData() + "  ");
+			inOrder(root.getRight());
+		}
+	}
+
+	public void postOrder(Node root) {
+		if(root != null) {
+			postOrder(root.getLeft());
+			postOrder(root.getRight());
+			System.out.print(root.getData() + "  ");
+		}
+	}
+
+	public static void main(String[] args) {
+		int choice = 0;
+		BST bst = new BST();
+		Scanner scanner = Node.getScanner();
+		do {
+			System.out.print("\n1:Add 2:Inorder 3:PreOrder 4:PostOrder 5:Exit \t Your choice? ");
+			choice = scanner.nextInt();
+			switch(choice) {
+			case 1 : bst.addNode(); break;
+			case 2 : bst.inOrder(bst.root); break;
+			case 3 : bst.preOrder(bst.root); break;
+			case 4 : bst.postOrder(bst.root); break;
+			case 5 : System.out.println("End of Program");
+					 choice = 0;
+					 break;
+			default: System.out.println("Invalid choice enetered");
+			}
+		}while(choice != 0);
+		Node.closeScanner();
+	}
+}
+-------------------------------
