@@ -487,4 +487,34 @@ public class MergeSort {
 	}
 }
 -------------------------------------------------------
-Trees
+TREES
+> A Tree is a acyclic (heirarchical) DS
+> A Tree has one start point which we call it as Root of the Tree.
+> The data in the Tree are stored in NODES. Each node stores one object of the respective entity. All Nodes will be of the same type.
+> The Node also stores the address (link(s)) of the Nodes that can be reached from it.
+> The Root Node is said to be at a LEVEL 1
+> The Node that can be reached from the current node is said to be CHILD node.
+> Thus when we descend the tree, we reach the child nodes.
+> Reaching a child node is said to be one traversal.
+> The Node from which we traverse is said to be the PARENT node of the child node which we are about to traverse to.
+> The maximum possible Level in the Tree is the DEPTH/HEIGHT of the tree.
+> Starting from the Root if we are able to reach a node with no chil nodes, also called as LEAF node, then we have traversed a PATH in the tree.
+> Reaching any node in the Tree has exactly one Path and thus it is UNIQUE.
+> All paths in a Tree are Unique.
+> If every node in the Tree has maximum 2 child nodes, then such a tree is said to be BINARY TREE.
+> In a Binary Tree, the node which is to left is said to be LEFT CHILD and the other one is RIGHT CHILD.
+> In a binary tree of height N, there can be a maximum of 2powN - 1 Nodes. Thus it is always a Odd number.
+> If in a binary tree of height N, there are exactly 2powN - 1 nodes, then it is said to be COMPLETE BINARY TREE.
+> If in a Binary tree we have all the nodes with exactly 0 or 2 child nodes then such a binary tree is said to be STRICTLY BINARY TREE.
+> If in a binary tree, we have only left child nodes or only right child nodes, then it is exactly linear DS. And such a tree is the worst possible tree. Because any operation like search, add new node etc will cost O(N) efficiency.
+> However, when the tree is complete or almost complete tree, then such a tree is said to be well BALANCED.
+> In a BALANCED  binary tree, the operations like look-up, addition, search or deletion would cost log(N) efficiency.
+> In a binary tree if the nodes are arranged in such a way that the child node of any node in the tree has data lesser than its data and the right child node data is greater than or equal to its data then the tree is said to be BINARY SEARCH TREE.
+> In a BBST the WCE of any operation is Log(N)
+> When ever we add a new node in to a BST, it is always added as a Leaf node.
+> Staying at node (From any node) in the BT, all the nodes that can be reached along with the left child node is said to be LEFT SUB TREE and on similar lines we can imagine to have the RIGHT SUB TREE.
+> While performing any action on a BT or BST, it is very important to understand that, every new node we reach/traverse itself can be considered as the Root and thus the nodes that can be reached from it as a new tree.
+> The above statement, makes it very easy to solve any problem like adding or deleting a node in the tree.
+> That is, we define the logic for only 3 nodes, namely the root, left and right child nodes. And this can be RECURSIVELY applied to the entire tree.
+Traversals:
+> 
