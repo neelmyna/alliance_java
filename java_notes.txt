@@ -79,6 +79,10 @@ The worst case scenario is when the element is not found. This conclusion we can
 Thus the WCE of linear search is O(N)
 
 There is one more case where we get O(N) efficiency. That is when the element is found at the last position or some where near to it.
+
+WCE = O(N)
+ACE = O(N)
+BCE = O(1)
 ------------------------------------------------------------
 BINARY SEARCH:
 Prerequisite: The I/P list must be sorted.
@@ -180,6 +184,10 @@ N = 2pow(X) // Ignore the constants, because N is very very big
 Hence X = Log(N)
 Thus the WCE of Binary search is Log(N)
 And of course, the BCE will be O(1)
+
+WCE = O(Log(N))
+ACE = O(Log(N))
+BCE = O(1)
 ------------------------------------------------------
 SORTING:
 > To sort any list of elements, we must access (look up) all elements from the unsorted array and keep placing one element at a time into the sorted array.
@@ -191,6 +199,7 @@ SORTING:
 > The inner loops does the thing/job like, comparing the consecutive elements (Bubble sort), shifting the elements (insertion sort), finding the index/position of current element (selection sort) etc.
 
 BUBBLE SORT:
+> It works on the Brute Force Technique. That is, no specific formula or strategy is applied. Rather the natural and trivial way of problem solving is applied.
 > We start from any one of the 2 corners/ends of the unsorted array. Usually from the front end of the array
 > We compare the consecutive elements of the array and swap the elements if the 1st element is bigger than the 2nd (Assuming we are sorting in increasing order)
 > We continue to compare the consecutive elements until end of the unsorted array. Thus we bubble/push the ith biggest element to its final position.
@@ -214,3 +223,166 @@ ACE = O(N square)
 BCE = O(N)
 ----------------------
 Pseudocode:
+Assume i referes to indices of the array.
+
+for i from 0 to array.length-2 do: // Access all elements of the unsorted array
+	for j from 0 to array.length-i-1 do: // access and compare consecutive elements in the unsorted array
+		if array[j] > array[j+1] do:
+			swap array[j] > array[j+1]
+
+The above code is without optimization
+The below code is with optimization
+for i from 0 to array.length-2 do: // Access all elements of the unsorted array
+	sorted = true // Assume the array is sorted
+	for j from 0 to array.length-i-1 do: // access and compare consecutive elements in the unsorted array
+		if array[j] > array[j+1] do:
+			swap array[j] > array[j+1]
+			sorted = false
+	if(sorted)
+		return
+-----------------------
+package java_concepts;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class BubbleSort {
+	private int inputSize;
+	private int[] array;
+	private static Scanner scanner;
+	
+	static {
+		scanner = new Scanner(System.in);
+	}
+
+	public void readInputData() {
+		System.out.print("Enter input size of the list: ");
+		inputSize = scanner.nextInt();
+		array = new int[inputSize];
+		System.out.println("Enter " + inputSize + " numbers:");
+		for(int i = 0; i < inputSize; i++)
+			array[i] = scanner.nextInt();
+		System.out.println("User given List of numbers is \n" + Arrays.toString(array));
+	}
+	
+	public void bubbleSort() {
+		for(int i = 0; i < inputSize-1; i++) {
+			boolean sorted = true;
+			for(int j = 0; j < inputSize-i-1; j++) {
+				if(array[j] > array[j+1]) {
+					int temp = array[j];
+					array[j] = array[j+1];
+					array[j+1] = temp;
+					sorted = false;
+				}
+			}
+			if(sorted)
+				return;
+		}
+	}
+	
+	public static void main(String[] args) {
+		BubbleSort bs = new BubbleSort();
+		bs.readInputData();
+		bs.bubbleSort();
+		System.out.println("Sorted Array is:");
+		System.out.println(Arrays.toString(bs.array));
+	}
+}
+---------------------------------------
+INSERTION SORT:
+> works on the principle of Decrease and Conquer.
+> Very important algorithm to research for a beginner to understand efficiencies and applications of algorithms.
+> Even before we start the sorting, Insertion sort presumes that there is already a sorted list available in the given I/P list.
+> We know that a single element array is already sorted. Taking this as an advantage, Insertion sort, considers the very 1st element in the array to be of a single element array (partial array) which is of course sorted.
+> Now we have to just take each element at a time from the unsorted array and place it in the sorted array.
+> However, we must place the new element in the sorted array in the position such that the array is always sorted.
+> To do this, we must make empty place for the new element. Hence, we must shift all the elements in the sorted array to the right (assuming we are sorting in ascending order from front end to rear end).
+> This shifting of elements is O(n) algorithm.
+> However, the number of shifts may be 0 or many. Hence it is implemented using while loop.
+> When the list is already sorted (almost sorted), then we see that there are zero number of shifts to place every new element into the sorted array.
+> And hence the BCE of Insertion sort is O(N) [because only the outer loop runs, and inner while loop will have zero iterations for each iteration of outer for loop]
+> We can also observe that in the worst case scenario (sorting the sorted array in reverse order), there will be maximum possible number of shifts for every new element and the new element is always placed at the boundary.
+> We can also observe that when the I/P list size is very big, then the last few elements in the I/P list if need to be placed at the beginning of the sorted list (these elements are too small as a number), then there will be too many shifts and this will fail the insertion sort, because we end up with the efficiency almost nearer to O(N square)
+
+Examples:
+12   55   43   31   37    7    13    29
+12
+12   55
+12   43   55
+12   31   43   55
+12   31   37   43   55
+7    12   31   37   43   55
+7    12   13   31   37   43   55
+7    12   13   29   31   37   43   55
+Much leser than O(N square)
+Hence it is ACE
+-----------------------
+7   12   13   29   31   37   43   55
+7
+7   12
+7   12   13
+7   12   13   29
+7   12   13   29   31
+7   12   13   29   31   37
+7   12   13   29   31   37   43
+7   12   13   29   31   37   43   55
+No shifts at all. Hence control never goes inside the while loop
+Hence best case scenario is as if we are copying elements of an array into another.
+So, BCE is O(N)
+------------------------------
+As we all know, the worst case scenario is when the sorted list should be sorted in reverse order.
+Sort the below array in decreasing order
+7   12   13   29   31   37   43   55
+7
+12   7 (12 is placed at boundary. max shifts done)
+13  12   7 (13 is placed at boundary. max shifts done)
+29  13   12   13 (29 is placed at boundary. max shifts done)
+And so on....
+------------------------
+Thus we see that when the list must be sorted in reverse order and the list size is too big, then Insertion sort works the worst way.
+
+Contrarily, when the list is almost sorted and we must sort it fully in same order then we enjoy O(N) efficiency.
+It is further better when the input size is small.
+------------------------------------------------
+
+public class InsertionSort {
+	private int inputSize;
+	private int[] array;
+	private static Scanner scanner;
+	
+	static {
+		scanner = new Scanner(System.in);
+	}
+
+	public void readInputData() {
+		System.out.print("Enter input size of the list: ");
+		inputSize = scanner.nextInt();
+		array = new int[inputSize];
+		System.out.println("Enter " + inputSize + " numbers:");
+		for(int i = 0; i < inputSize; i++)
+			array[i] = scanner.nextInt();
+		System.out.println("User given List of numbers is \n" + Arrays.toString(array));
+	}
+	
+	public void insertionSort() {
+		for(int i = 1; i < inputSize; i++) {
+			int element = array[i];
+			int j = i - 1;
+			while(j >= 0 && element < array[j]) {
+				array[j+1] = array[j];
+				j--;
+			}
+			array[j+1] = element;
+		}
+	}
+	
+	public static void main(String[] args) {
+		InsertionSort bs = new InsertionSort();
+		bs.readInputData();
+		bs.insertionSort();
+		System.out.println("Sorted Array is:");
+		System.out.println(Arrays.toString(bs.array));
+	}
+}
+-------------------------------
