@@ -40,5 +40,124 @@ CRUD operations RESTful API End Points
 	findBnyIdAndDelete() // delete // delete from students where id = ?
 	findBnyIdAndUpdate() // put // update students set ? = ? where id = ?
 ---------------------------------------
+Day4 06-10-2024
 
+Linear Search
+Binary Search
+Bubble Sort
+Insertion Sort
+Merge Sort
+BST (insertion, search and traversals, deletion)
+Continuation of Mini Project (DB connectivity and CRUD operations)
+
+LINEAR SEARCH
+Given a list of elements, we search for an element sequentially or linearly.
+The Scenarios:
+1. The search element might be found at the very 1st position or very near to the 1st position.
+2. The search element might be found at the very last position or some where near the last position.
+3. The search element is not at all found.
+
+BIG-OH NOTATION:
+> It is usually used to find the worst case efficiency (WCE) of an algorithm.
+> However it can be used to find the BCE also.
+> It gives/finds the efficiency in terms of the input size N.
+> It doesn't give us the exact efficiency, rather the purpose is to tell in what order the algorithm is. For example, logarthmic, square root, linear, quadratic, factorial etc.
+> The Big-Oh considers the I/P size to be very very big.
+
+We always will be knowing the I/P size N.
+
+So we can use for loop.
+
+for i from 1 to N do:
+	if list[i] == searchElement
+		return i // return i, the position where element is found
+return -1 // -1 is to indicate that the element was not found.
+
+The BCE of Linear search is O(1), that is, one unit of time is taken, becuase one unit of work is done.
+
+The worst case scenario is when the element is not found. This conclusion we can make only when all the elements of the list/array are accessed (look up).
+Thus the WCE of linear search is O(N)
+
+There is one more case where we get O(N) efficiency. That is when the element is found at the last position or some where near to it.
+------------------------------------------------------------
+BINARY SEARCH:
+Prerequisite: The I/P list must be sorted.
+
+We start the search by moving to exactly the mid element in the list and check if the mid element is the search element.
+
+If yes, then we got the element and stop.
+If not, then we check if the key is smaller than the mid element,
+	if yes, then set the search area to 1st half of the list
+	else, we set the 2nd half of the list as search area.
+Continue the above steps until a single element is left in the search area.
+
+Read N
+define array[N]
+read Key
+set low  = 0   // The start index
+set high = N-1 // The last index
+do:
+	mid = (low + high) / 2  // see that is integer division only.
+	if array[mid] == key then:
+		return mid
+	else if key < array[mid] then:
+		high = mid - 1
+	else
+		low = mid + 1
+-------------------------------------------------
+package java_concepts;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class BinarySearch {
+	private int inputSize;
+	private double[] array;
+	private double searchKey;
+	private static Scanner scanner;
+	
+	static {
+		scanner = new Scanner(System.in);
+	}
+	
+	public void readInputData() {
+		System.out.print("Enter input size of the list: ");
+		inputSize = scanner.nextInt();
+		array = new double[inputSize];
+		System.out.println("Enter " + inputSize + " numbers:");
+		for(int i = 0; i < inputSize; i++)
+			array[i] = scanner.nextDouble();
+		Arrays.sort(array);
+		System.out.println("User given List of numbers is \n" + Arrays.toString(array));
+		System.out.print("Enter search element: ");
+		searchKey = scanner.nextDouble();
+	}
+	
+	public int binarySearch() {
+		int low = 0;
+		int high = inputSize-1;
+		do {
+			int mid = (low + high) / 2;
+			if (array[mid] == searchKey)
+				return mid;
+			else if(searchKey < array[mid])
+				high = mid-1;
+			else
+				low = mid+1;
+		}while(low <= high); // until list has at least one element
+		
+		return -1; // Element not found
+	}
+	
+	public static void main(String[] args) {
+		BinarySearch ls = new BinarySearch();
+		ls.readInputData();
+		int keyIndex = ls.binarySearch();
+		if(keyIndex == -1)
+			System.out.println("Search element not found");
+		else
+			System.out.println("Search element found at position " + (keyIndex+1));
+	}
+}
+------------------------------------------------------
 
