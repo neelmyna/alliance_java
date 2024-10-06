@@ -385,4 +385,106 @@ public class InsertionSort {
 		System.out.println(Arrays.toString(bs.array));
 	}
 }
+
+WCE = O(N square)
+ACE = O(N square)
+BCE = O(N)
 -------------------------------
+MERGE SORT
+> Strategy: Divide and Conquer
+> Most stable sorting technique. Becasue does the same job for all 3 scenarios.
+> Better efficiency than O(N square) which is O(n Log(N))
+> Readabality is poor (difficult to understand and implement)
+> Uses recursion and hence should be avoided for very long lists.
+
+> First we divide the given array into N arrays (N is the size)
+> Then we begin merge step and keep merging the single element arrays into 2 element arrays, and then 2 element arrays into 4 element array and so on till a single array is built.
+> It is while the merge step, we compare the elements in the 2 arrays being merged.
+> We use the array iterative variables to keep track of the elements merged.
+> When one array exhausts, we simply copy the remaning elements from the other array to the merged array being constructed.
+> Note that all these operations are actually happening within the I/P array itself.
+> The divide step is expected to have an efficiency of Log(N)
+> The merge step is expected to have an efficiency of O(N)
+> Thus the total efficiency of Merge sort is O(N Log(N))
+
+Example:
+12   55   43   31   37    7    13    29    11
+
+12   55   43   31   37          7    13    29    11
+
+12   55   43        31   37        7   13        29    11
+
+12   55      43      31      37     7     13      29       11
+
+12       55       43      31       37      7      13      29       11
+
+12  55            43      31       37      7      13      29       11
+				  
+12  55      31   43         37      7      13      29       11
+				                           
+12  55     31   43       7   37      13   29      11
+						 
+12  31   43   55         7   13   29   37         11
+
+7   12   13    29   31   37   43   55         11   
+
+7   11   12   13    29   31   37   43   55
+-----------------------------------------------
+public class MergeSort {
+	private int inputSize;
+	private double[] array;
+	private static Scanner scanner;
+
+	static {
+		scanner = new Scanner(System.in);
+	}
+
+	public void readInputData() {
+		System.out.print("Enter input size of the list: ");
+		inputSize = scanner.nextInt();
+		array = new double[inputSize];
+		System.out.println("Enter " + inputSize + " numbers:");
+		for (int i = 0; i < inputSize; i++)
+			array[i] = scanner.nextInt();
+		System.out.println("User given List of numbers is \n" + Arrays.toString(array));
+	}
+
+	public void merge(double[] array, double[] left, double[] right) {
+		int i = 0, j = 0, k = 0;
+		while (i < left.length && j < right.length) {
+			if (left[i] < right[j])
+				array[k++] = left[i++];
+			else
+				array[k++] = right[j++];
+		}
+		while (i < left.length)
+			array[k++] = left[i++];
+
+		while (j < right.length)
+			array[k++] = right[j++];
+	}
+
+	public void mergeSort(double[] array) {
+		if (array.length > 1) {
+			int mid = array.length / 2;
+			double[] left = new double[mid];
+			double[] right = new double[array.length - mid];
+			System.arraycopy(array, 0, left, 0, mid);
+			System.arraycopy(array, mid, right, 0, array.length - mid);
+
+			mergeSort(left);
+			mergeSort(right);
+			merge(array, left, right);
+		}
+	}
+
+	public static void main(String[] args) {
+		MergeSort bs = new MergeSort();
+		bs.readInputData();
+		bs.mergeSort(bs.array);
+		System.out.println("Sorted Array is:");
+		System.out.println(Arrays.toString(bs.array));
+	}
+}
+-------------------------------------------------------
+Trees
