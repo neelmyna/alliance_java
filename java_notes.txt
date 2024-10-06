@@ -159,5 +159,58 @@ public class BinarySearch {
 			System.out.println("Search element found at position " + (keyIndex+1));
 	}
 }
-------------------------------------------------------
 
+EFFICIENCY OF BINARY SEARCH:
+Note that, we find the efficiency in terms of the I/P size N
+To do this, we must count the total number of iterations of the loop or nested loops we use.
+However, in Binary search we use do-while loop and not the for loop.
+Thus, we have no direct way to find the number of iterations.
+Hence, we must find the number of iterations in an indirect way.
+
+Let the number of ierations be X (un known value which we have find)
+Because, the efficiency depends on X.
+We know the number of elements in 1st iteration is N
+And in every next iteration, the number of elements will be halved.
+Thus the number of elements in all the iterations will be:
+
+N          N/2      N/4      N/8  .......     4      2      1
+2pow(X-1)								    2pow2  2pow1  2pow0
+Thus,
+N = 2pow(X) // Ignore the constants, because N is very very big
+Hence X = Log(N)
+Thus the WCE of Binary search is Log(N)
+And of course, the BCE will be O(1)
+------------------------------------------------------
+SORTING:
+> To sort any list of elements, we must access (look up) all elements from the unsorted array and keep placing one element at a time into the sorted array.
+> Note that the unsorted array and the sorted array are within the same given array.
+> Thus, the unsorted array keeps shrinking while sorted array keeps growing.
+> In almost all the sorting algorithms (except Merge sort), the best case scenario/efficiency is when the list is already sorted and we too are sorting the list in the same order.
+> In almost all the sorting algorithms (except Merge sort), the worst case scenario/efficiency is when the list is already sorted, but we are sorting the list in the reverse order.
+> In the implementation of sorting algorithms, the outer loop always run to access the elements from the unsorted array
+> The inner loops does the thing/job like, comparing the consecutive elements (Bubble sort), shifting the elements (insertion sort), finding the index/position of current element (selection sort) etc.
+
+BUBBLE SORT:
+> We start from any one of the 2 corners/ends of the unsorted array. Usually from the front end of the array
+> We compare the consecutive elements of the array and swap the elements if the 1st element is bigger than the 2nd (Assuming we are sorting in increasing order)
+> We continue to compare the consecutive elements until end of the unsorted array. Thus we bubble/push the ith biggest element to its final position.
+> Bubble sort is very typical nature, meaning it is very simple to use. Thus readability is easy.
+> However, Bubble sort has no intelligent idea/step to predict the I/P list elements.
+> This is because, even in the case where the I/P list is fully sorted, the Bubble sort algorithm does the same number comparisons or all comparisons when the list is not sorted or need to be sorted in reverse order of the I/P sorted list.
+> The outer loop access elements from the unsorted array while the inner loop compares the consecutive elements in the unsorted array.
+> In the worst case scenario, we find the maximum possible number of swaps to happen.
+> In the best case scenario, the number of swaps in every iteration of the outer loop will be zero.
+> Thus, when we find that there are no swaps for an iteration of the outer loop (placing one element in its final position. Thus the element is already in its final position and thus we also get to know that there is no need move any of the remaining elements of the unsorted array), we can stop the sorting as the array is by now fully sorted.
+> Thus by adding a small condition to check if there were no swaps, we can optimise the WCE of Bubble sort from O(N square) which is quadratic to O(N) which is linear.
+
+Without Optimization,
+WCE = O(N square)
+ACE = O(N square)
+BCE = O(N square)
+
+After optimization,
+WCE = O(N square)
+ACE = O(N square)
+BCE = O(N)
+----------------------
+Pseudocode:
