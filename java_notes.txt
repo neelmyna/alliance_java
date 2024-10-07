@@ -40,5 +40,98 @@ CRUD operations RESTful API End Points
 	findBnyIdAndDelete() // delete // delete from students where id = ?
 	findBnyIdAndUpdate() // put // update students set ? = ? where id = ?
 ---------------------------------------
+https://github.com/neelmyna/alliance_java
+
+------------------------------------------
+checkArrangement(boys, girls):
+	arrangement = "yes" // Assume the arrangement is possible
+	length = length(boys)
+	for i from 1 to length-1 do:
+		if boys[i] < girls[i-1] or girls[i-1] < boys[i] do:
+			arrangement = "no"
+	if !arrangement and (boys[length-1] < girls[length-2] or girls[length-1] < boys[length-2] do:
+		arrangement = "no"
+	return arrangement
+	
+Read T (No. of test cases)
+for i from 1 to T do:
+	Read N (No. of boys and No. of girls)
+	declare boys[n] and girls[n] arrays
+	Read N heights of boys[]
+	Read N heights of girls[]
+	sort boys[]
+	sort girls[]
+	define a list of strings ARRANGEMENTS (this stores yes no....)
+	result = checkArrangement(boys, girls)
+	Add result to the list ARRANGEMENTS
+
+Print ARRANGEMENTS as O/P
+---------------------------------------------------------------
+Irrespective of the Programing languages, how the functions/methods work is same and it is called as FUNCTION CALL STACK or simply Call Stack and it is implemented using STACK BASED ENVIRONMENT.
+
+We have to know the special purpose registers:
+
+IR: Instruction Register
+It holds address of the instruction that is currently Running
+PC: Program Counter
+It holds address of the next instruction to be executed
+SP: Stack Pointer
+It holds address of the top frame in the Stack
+FP: Frame Pointer
+It holds address of the Frame of the function that is currently running
+
+Frame:
+A Frame is memory allocated to a function during runtime when it is called.
+Content of a Frame:
+local variables
+function parameters (arguments)
+linkages (addresses of the called function(s))
+Return Address (When ever the Callee (called function) is called by the Caller (calling function), before the control leaves the Caller, the content of PC is copied into the frame as Return address).
+-----------------------------------------------------------------
+M: Number of openings, N number of applicants
+1. DSA and Problem Solving (10:40)
+2. Core Java (10:30)
+3. Python (Core Python, numpy, pandas, os, sys, pickle, json, csv, matplotlib) (10:40)
+4. Web App Dev (Any one)
+	1. Java-Spring Boot (Any one DB) (10:20)
+	2. MERN (10:20)
+	3. MEAN (10:15)
+	4. MEVN (10:10)
+	5. Python-Django-Flask (10:20)
+	6. C# and Deot Net FS (10:10)
+5. Databases:
+	MongoDB and Any one SQL/RDBMS (MySQL, MS SQL Server or Postgres)
+	PLSQL, Joins, triggers, cursors, views
+	Similarly, MongoDB advanced
+6. UI/UX Expert: (10:25)
+	UI UX Libraries and IDEs
+	CSS, SCSS, Bootstrap and any one of MaterialUI or Tailwind
+7. JS and TypeScript and NextJS (10:20)
+8. Modern C++ (10:5) C++11,14,17, 20,26
+-------------------------------------------------------------
+Core Java:
+OOP concepts (AEIP, this, final, super, interface, Wrapper classes)
+Libraries: String, sql, date, StringBuilder, Arrays, Stream, Lambda functionbs, Functional Interface, Java8 and Java11 features
+COLLECTIONS: ArrayList, Maps, sets, Tree
+Exception Handling, Java Architecture
+--------------------------------------------------
+DSA and Problem Solvig:
+Primary Sorting and Searching: linear search, binary search, bubble sort, selection sort, insertion, merge sort, quick sort, heap sort
+
+DS:
+Implement Circular Queue using Array
+deque
+BST (3 traversals, adding node, searching node)
+Deleting Node:
+	1. When node has no children (leaf node)
+	2. When node has one child
+	3. When node has 2 children (complex algorithm)
+BBST (Need for balanced (balancing) BST)
+AVL (BBST) Self BBST
+2-3 Tree
+DFS BFS (Graphs)
+Greedy technique and Dymanic Programming (Problem Solving)
+N-Queens, Krukskal, Dijikstra's, Prims
 
 
+https://docs.google.com/forms/d/e/1FAIpQLScy67nxbsdgYWi3MNrjy87CGI259_8LB5VolMXdTWjWbNtSFA/viewform
