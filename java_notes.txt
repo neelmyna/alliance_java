@@ -40,6 +40,7 @@ CRUD operations RESTful API End Points
 	findBnyIdAndDelete() // delete // delete from students where id = ?
 	findBnyIdAndUpdate() // put // update students set ? = ? where id = ?
 ---------------------------------------
+<<<<<<< HEAD
 https://github.com/neelmyna/alliance_java
 
 ------------------------------------------
@@ -132,6 +133,642 @@ AVL (BBST) Self BBST
 DFS BFS (Graphs)
 Greedy technique and Dymanic Programming (Problem Solving)
 N-Queens, Krukskal, Dijikstra's, Prims
+=======
+Day4 06-10-2024
+>>>>>>> af60bbfff7e1f2ab47040009b3cbd23effd1aa9c
 
+Linear Search
+Binary Search
+Bubble Sort
+Insertion Sort
+Merge Sort
+BST (insertion, search and traversals, deletion)
+Continuation of Mini Project (DB connectivity and CRUD operations)
 
+<<<<<<< HEAD
 https://docs.google.com/forms/d/e/1FAIpQLScy67nxbsdgYWi3MNrjy87CGI259_8LB5VolMXdTWjWbNtSFA/viewform
+=======
+LINEAR SEARCH
+Given a list of elements, we search for an element sequentially or linearly.
+The Scenarios:
+1. The search element might be found at the very 1st position or very near to the 1st position.
+2. The search element might be found at the very last position or some where near the last position.
+3. The search element is not at all found.
+
+BIG-OH NOTATION:
+> It is usually used to find the worst case efficiency (WCE) of an algorithm.
+> However it can be used to find the BCE also.
+> It gives/finds the efficiency in terms of the input size N.
+> It doesn't give us the exact efficiency, rather the purpose is to tell in what order the algorithm is. For example, logarthmic, square root, linear, quadratic, factorial etc.
+> The Big-Oh considers the I/P size to be very very big.
+
+We always will be knowing the I/P size N.
+
+So we can use for loop.
+
+for i from 1 to N do:
+	if list[i] == searchElement
+		return i // return i, the position where element is found
+return -1 // -1 is to indicate that the element was not found.
+
+The BCE of Linear search is O(1), that is, one unit of time is taken, becuase one unit of work is done.
+
+The worst case scenario is when the element is not found. This conclusion we can make only when all the elements of the list/array are accessed (look up).
+Thus the WCE of linear search is O(N)
+
+There is one more case where we get O(N) efficiency. That is when the element is found at the last position or some where near to it.
+
+WCE = O(N)
+ACE = O(N)
+BCE = O(1)
+------------------------------------------------------------
+BINARY SEARCH:
+Prerequisite: The I/P list must be sorted.
+
+We start the search by moving to exactly the mid element in the list and check if the mid element is the search element.
+
+If yes, then we got the element and stop.
+If not, then we check if the key is smaller than the mid element,
+	if yes, then set the search area to 1st half of the list
+	else, we set the 2nd half of the list as search area.
+Continue the above steps until a single element is left in the search area.
+
+Read N
+define array[N]
+read Key
+set low  = 0   // The start index
+set high = N-1 // The last index
+do:
+	mid = (low + high) / 2  // see that is integer division only.
+	if array[mid] == key then:
+		return mid
+	else if key < array[mid] then:
+		high = mid - 1
+	else
+		low = mid + 1
+-------------------------------------------------
+package java_concepts;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class BinarySearch {
+	private int inputSize;
+	private double[] array;
+	private double searchKey;
+	private static Scanner scanner;
+	
+	static {
+		scanner = new Scanner(System.in);
+	}
+	
+	public void readInputData() {
+		System.out.print("Enter input size of the list: ");
+		inputSize = scanner.nextInt();
+		array = new double[inputSize];
+		System.out.println("Enter " + inputSize + " numbers:");
+		for(int i = 0; i < inputSize; i++)
+			array[i] = scanner.nextDouble();
+		Arrays.sort(array);
+		System.out.println("User given List of numbers is \n" + Arrays.toString(array));
+		System.out.print("Enter search element: ");
+		searchKey = scanner.nextDouble();
+	}
+	
+	public int binarySearch() {
+		int low = 0;
+		int high = inputSize-1;
+		do {
+			int mid = (low + high) / 2;
+			if (array[mid] == searchKey)
+				return mid;
+			else if(searchKey < array[mid])
+				high = mid-1;
+			else
+				low = mid+1;
+		}while(low <= high); // until list has at least one element
+		
+		return -1; // Element not found
+	}
+	
+	public static void main(String[] args) {
+		BinarySearch ls = new BinarySearch();
+		ls.readInputData();
+		int keyIndex = ls.binarySearch();
+		if(keyIndex == -1)
+			System.out.println("Search element not found");
+		else
+			System.out.println("Search element found at position " + (keyIndex+1));
+	}
+}
+
+EFFICIENCY OF BINARY SEARCH:
+Note that, we find the efficiency in terms of the I/P size N
+To do this, we must count the total number of iterations of the loop or nested loops we use.
+However, in Binary search we use do-while loop and not the for loop.
+Thus, we have no direct way to find the number of iterations.
+Hence, we must find the number of iterations in an indirect way.
+
+Let the number of ierations be X (un known value which we have find)
+Because, the efficiency depends on X.
+We know the number of elements in 1st iteration is N
+And in every next iteration, the number of elements will be halved.
+Thus the number of elements in all the iterations will be:
+
+N          N/2      N/4      N/8  .......     4      2      1
+2pow(X-1)								    2pow2  2pow1  2pow0
+Thus,
+N = 2pow(X) // Ignore the constants, because N is very very big
+Hence X = Log(N)
+Thus the WCE of Binary search is Log(N)
+And of course, the BCE will be O(1)
+
+WCE = O(Log(N))
+ACE = O(Log(N))
+BCE = O(1)
+------------------------------------------------------
+SORTING:
+> To sort any list of elements, we must access (look up) all elements from the unsorted array and keep placing one element at a time into the sorted array.
+> Note that the unsorted array and the sorted array are within the same given array.
+> Thus, the unsorted array keeps shrinking while sorted array keeps growing.
+> In almost all the sorting algorithms (except Merge sort), the best case scenario/efficiency is when the list is already sorted and we too are sorting the list in the same order.
+> In almost all the sorting algorithms (except Merge sort), the worst case scenario/efficiency is when the list is already sorted, but we are sorting the list in the reverse order.
+> In the implementation of sorting algorithms, the outer loop always run to access the elements from the unsorted array
+> The inner loops does the thing/job like, comparing the consecutive elements (Bubble sort), shifting the elements (insertion sort), finding the index/position of current element (selection sort) etc.
+
+BUBBLE SORT:
+> It works on the Brute Force Technique. That is, no specific formula or strategy is applied. Rather the natural and trivial way of problem solving is applied.
+> We start from any one of the 2 corners/ends of the unsorted array. Usually from the front end of the array
+> We compare the consecutive elements of the array and swap the elements if the 1st element is bigger than the 2nd (Assuming we are sorting in increasing order)
+> We continue to compare the consecutive elements until end of the unsorted array. Thus we bubble/push the ith biggest element to its final position.
+> Bubble sort is very typical nature, meaning it is very simple to use. Thus readability is easy.
+> However, Bubble sort has no intelligent idea/step to predict the I/P list elements.
+> This is because, even in the case where the I/P list is fully sorted, the Bubble sort algorithm does the same number comparisons or all comparisons when the list is not sorted or need to be sorted in reverse order of the I/P sorted list.
+> The outer loop access elements from the unsorted array while the inner loop compares the consecutive elements in the unsorted array.
+> In the worst case scenario, we find the maximum possible number of swaps to happen.
+> In the best case scenario, the number of swaps in every iteration of the outer loop will be zero.
+> Thus, when we find that there are no swaps for an iteration of the outer loop (placing one element in its final position. Thus the element is already in its final position and thus we also get to know that there is no need move any of the remaining elements of the unsorted array), we can stop the sorting as the array is by now fully sorted.
+> Thus by adding a small condition to check if there were no swaps, we can optimise the WCE of Bubble sort from O(N square) which is quadratic to O(N) which is linear.
+
+Without Optimization,
+WCE = O(N square)
+ACE = O(N square)
+BCE = O(N square)
+
+After optimization,
+WCE = O(N square)
+ACE = O(N square)
+BCE = O(N)
+----------------------
+Pseudocode:
+Assume i referes to indices of the array.
+
+for i from 0 to array.length-2 do: // Access all elements of the unsorted array
+	for j from 0 to array.length-i-1 do: // access and compare consecutive elements in the unsorted array
+		if array[j] > array[j+1] do:
+			swap array[j] > array[j+1]
+
+The above code is without optimization
+The below code is with optimization
+for i from 0 to array.length-2 do: // Access all elements of the unsorted array
+	sorted = true // Assume the array is sorted
+	for j from 0 to array.length-i-1 do: // access and compare consecutive elements in the unsorted array
+		if array[j] > array[j+1] do:
+			swap array[j] > array[j+1]
+			sorted = false
+	if(sorted)
+		return
+-----------------------
+package java_concepts;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class BubbleSort {
+	private int inputSize;
+	private int[] array;
+	private static Scanner scanner;
+	
+	static {
+		scanner = new Scanner(System.in);
+	}
+
+	public void readInputData() {
+		System.out.print("Enter input size of the list: ");
+		inputSize = scanner.nextInt();
+		array = new int[inputSize];
+		System.out.println("Enter " + inputSize + " numbers:");
+		for(int i = 0; i < inputSize; i++)
+			array[i] = scanner.nextInt();
+		System.out.println("User given List of numbers is \n" + Arrays.toString(array));
+	}
+	
+	public void bubbleSort() {
+		for(int i = 0; i < inputSize-1; i++) {
+			boolean sorted = true;
+			for(int j = 0; j < inputSize-i-1; j++) {
+				if(array[j] > array[j+1]) {
+					int temp = array[j];
+					array[j] = array[j+1];
+					array[j+1] = temp;
+					sorted = false;
+				}
+			}
+			if(sorted)
+				return;
+		}
+	}
+	
+	public static void main(String[] args) {
+		BubbleSort bs = new BubbleSort();
+		bs.readInputData();
+		bs.bubbleSort();
+		System.out.println("Sorted Array is:");
+		System.out.println(Arrays.toString(bs.array));
+	}
+}
+---------------------------------------
+INSERTION SORT:
+> works on the principle of Decrease and Conquer.
+> Very important algorithm to research for a beginner to understand efficiencies and applications of algorithms.
+> Even before we start the sorting, Insertion sort presumes that there is already a sorted list available in the given I/P list.
+> We know that a single element array is already sorted. Taking this as an advantage, Insertion sort, considers the very 1st element in the array to be of a single element array (partial array) which is of course sorted.
+> Now we have to just take each element at a time from the unsorted array and place it in the sorted array.
+> However, we must place the new element in the sorted array in the position such that the array is always sorted.
+> To do this, we must make empty place for the new element. Hence, we must shift all the elements in the sorted array to the right (assuming we are sorting in ascending order from front end to rear end).
+> This shifting of elements is O(n) algorithm.
+> However, the number of shifts may be 0 or many. Hence it is implemented using while loop.
+> When the list is already sorted (almost sorted), then we see that there are zero number of shifts to place every new element into the sorted array.
+> And hence the BCE of Insertion sort is O(N) [because only the outer loop runs, and inner while loop will have zero iterations for each iteration of outer for loop]
+> We can also observe that in the worst case scenario (sorting the sorted array in reverse order), there will be maximum possible number of shifts for every new element and the new element is always placed at the boundary.
+> We can also observe that when the I/P list size is very big, then the last few elements in the I/P list if need to be placed at the beginning of the sorted list (these elements are too small as a number), then there will be too many shifts and this will fail the insertion sort, because we end up with the efficiency almost nearer to O(N square)
+
+Examples:
+12   55   43   31   37    7    13    29
+12
+12   55
+12   43   55
+12   31   43   55
+12   31   37   43   55
+7    12   31   37   43   55
+7    12   13   31   37   43   55
+7    12   13   29   31   37   43   55
+Much leser than O(N square)
+Hence it is ACE
+-----------------------
+7   12   13   29   31   37   43   55
+7
+7   12
+7   12   13
+7   12   13   29
+7   12   13   29   31
+7   12   13   29   31   37
+7   12   13   29   31   37   43
+7   12   13   29   31   37   43   55
+No shifts at all. Hence control never goes inside the while loop
+Hence best case scenario is as if we are copying elements of an array into another.
+So, BCE is O(N)
+------------------------------
+As we all know, the worst case scenario is when the sorted list should be sorted in reverse order.
+Sort the below array in decreasing order
+7   12   13   29   31   37   43   55
+7
+12   7 (12 is placed at boundary. max shifts done)
+13  12   7 (13 is placed at boundary. max shifts done)
+29  13   12   13 (29 is placed at boundary. max shifts done)
+And so on....
+------------------------
+Thus we see that when the list must be sorted in reverse order and the list size is too big, then Insertion sort works the worst way.
+
+Contrarily, when the list is almost sorted and we must sort it fully in same order then we enjoy O(N) efficiency.
+It is further better when the input size is small.
+------------------------------------------------
+
+public class InsertionSort {
+	private int inputSize;
+	private int[] array;
+	private static Scanner scanner;
+	
+	static {
+		scanner = new Scanner(System.in);
+	}
+
+	public void readInputData() {
+		System.out.print("Enter input size of the list: ");
+		inputSize = scanner.nextInt();
+		array = new int[inputSize];
+		System.out.println("Enter " + inputSize + " numbers:");
+		for(int i = 0; i < inputSize; i++)
+			array[i] = scanner.nextInt();
+		System.out.println("User given List of numbers is \n" + Arrays.toString(array));
+	}
+	
+	public void insertionSort() {
+		for(int i = 1; i < inputSize; i++) {
+			int element = array[i];
+			int j = i - 1;
+			while(j >= 0 && element < array[j]) {
+				array[j+1] = array[j];
+				j--;
+			}
+			array[j+1] = element;
+		}
+	}
+	
+	public static void main(String[] args) {
+		InsertionSort bs = new InsertionSort();
+		bs.readInputData();
+		bs.insertionSort();
+		System.out.println("Sorted Array is:");
+		System.out.println(Arrays.toString(bs.array));
+	}
+}
+
+WCE = O(N square)
+ACE = O(N square)
+BCE = O(N)
+-------------------------------
+MERGE SORT
+> Strategy: Divide and Conquer
+> Most stable sorting technique. Becasue does the same job for all 3 scenarios.
+> Better efficiency than O(N square) which is O(n Log(N))
+> Readabality is poor (difficult to understand and implement)
+> Uses recursion and hence should be avoided for very long lists.
+
+> First we divide the given array into N arrays (N is the size)
+> Then we begin merge step and keep merging the single element arrays into 2 element arrays, and then 2 element arrays into 4 element array and so on till a single array is built.
+> It is while the merge step, we compare the elements in the 2 arrays being merged.
+> We use the array iterative variables to keep track of the elements merged.
+> When one array exhausts, we simply copy the remaning elements from the other array to the merged array being constructed.
+> Note that all these operations are actually happening within the I/P array itself.
+> The divide step is expected to have an efficiency of Log(N)
+> The merge step is expected to have an efficiency of O(N)
+> Thus the total efficiency of Merge sort is O(N Log(N))
+
+Example:
+12   55   43   31   37    7    13    29    11
+
+12   55   43   31   37          7    13    29    11
+
+12   55   43        31   37        7   13        29    11
+
+12   55      43      31      37     7     13      29       11
+
+12       55       43      31       37      7      13      29       11
+
+12  55            43      31       37      7      13      29       11
+				  
+12  55      31   43         37      7      13      29       11
+				                           
+12  55     31   43       7   37      13   29      11
+						 
+12  31   43   55         7   13   29   37         11
+
+7   12   13    29   31   37   43   55         11   
+
+7   11   12   13    29   31   37   43   55
+-----------------------------------------------
+public class MergeSort {
+	private int inputSize;
+	private double[] array;
+	private static Scanner scanner;
+
+	static {
+		scanner = new Scanner(System.in);
+	}
+
+	public void readInputData() {
+		System.out.print("Enter input size of the list: ");
+		inputSize = scanner.nextInt();
+		array = new double[inputSize];
+		System.out.println("Enter " + inputSize + " numbers:");
+		for (int i = 0; i < inputSize; i++)
+			array[i] = scanner.nextInt();
+		System.out.println("User given List of numbers is \n" + Arrays.toString(array));
+	}
+
+	public void merge(double[] array, double[] left, double[] right) {
+		int i = 0, j = 0, k = 0;
+		while (i < left.length && j < right.length) {
+			if (left[i] < right[j])
+				array[k++] = left[i++];
+			else
+				array[k++] = right[j++];
+		}
+		while (i < left.length)
+			array[k++] = left[i++];
+
+		while (j < right.length)
+			array[k++] = right[j++];
+	}
+
+	public void mergeSort(double[] array) {
+		if (array.length > 1) {
+			int mid = array.length / 2;
+			double[] left = new double[mid];
+			double[] right = new double[array.length - mid];
+			System.arraycopy(array, 0, left, 0, mid);
+			System.arraycopy(array, mid, right, 0, array.length - mid);
+
+			mergeSort(left);
+			mergeSort(right);
+			merge(array, left, right);
+		}
+	}
+
+	public static void main(String[] args) {
+		MergeSort bs = new MergeSort();
+		bs.readInputData();
+		bs.mergeSort(bs.array);
+		System.out.println("Sorted Array is:");
+		System.out.println(Arrays.toString(bs.array));
+	}
+}
+-------------------------------------------------------
+TREES
+> A Tree is a acyclic (heirarchical) DS
+> A Tree has one start point which we call it as Root of the Tree.
+> The data in the Tree are stored in NODES. Each node stores one object of the respective entity. All Nodes will be of the same type.
+> The Node also stores the address (link(s)) of the Nodes that can be reached from it.
+> The Root Node is said to be at a LEVEL 1
+> The Node that can be reached from the current node is said to be CHILD node.
+> Thus when we descend the tree, we reach the child nodes.
+> Reaching a child node is said to be one traversal.
+> The Node from which we traverse is said to be the PARENT node of the child node which we are about to traverse to.
+> The maximum possible Level in the Tree is the DEPTH/HEIGHT of the tree.
+> Starting from the Root if we are able to reach a node with no chil nodes, also called as LEAF node, then we have traversed a PATH in the tree.
+> Reaching any node in the Tree has exactly one Path and thus it is UNIQUE.
+> All paths in a Tree are Unique.
+> If every node in the Tree has maximum 2 child nodes, then such a tree is said to be BINARY TREE.
+> In a Binary Tree, the node which is to left is said to be LEFT CHILD and the other one is RIGHT CHILD.
+> In a binary tree of height N, there can be a maximum of 2powN - 1 Nodes. Thus it is always a Odd number.
+> If in a binary tree of height N, there are exactly 2powN - 1 nodes, then it is said to be COMPLETE BINARY TREE.
+> If in a Binary tree we have all the nodes with exactly 0 or 2 child nodes then such a binary tree is said to be STRICTLY BINARY TREE.
+> If in a binary tree, we have only left child nodes or only right child nodes, then it is exactly linear DS. And such a tree is the worst possible tree. Because any operation like search, add new node etc will cost O(N) efficiency.
+> However, when the tree is complete or almost complete tree, then such a tree is said to be well BALANCED.
+> In a BALANCED  binary tree, the operations like look-up, addition, search or deletion would cost log(N) efficiency.
+> In a binary tree if the nodes are arranged in such a way that the child node of any node in the tree has data lesser than its data and the right child node data is greater than or equal to its data then the tree is said to be BINARY SEARCH TREE.
+> In a BBST the WCE of any operation is Log(N)
+> When ever we add a new node in to a BST, it is always added as a Leaf node.
+> Staying at node (From any node) in the BT, all the nodes that can be reached along with the left child node is said to be LEFT SUB TREE and on similar lines we can imagine to have the RIGHT SUB TREE.
+> While performing any action on a BT or BST, it is very important to understand that, every new node we reach/traverse itself can be considered as the Root and thus the nodes that can be reached from it as a new tree.
+> The above statement, makes it very easy to solve any problem like adding or deleting a node in the tree.
+> That is, we define the logic for only 3 nodes, namely the root, left and right child nodes. And this can be RECURSIVELY applied to the entire tree.
+Traversals:
+> If we access the nodes of the BT/BST in the order LR'R, then the traversal is said to be INORDER traversal.
+> When we traverse a BST in Inorder traversal, then we get the elements sorted manner (ascending order).
+> When we traverse the tree in the order R'LR then the traversal is said to be PREORDER traversal.
+> When we traverse the tree in the order LRR' then the traversal is said to be POSTORDER traversal.
+> Given the inorder and preorder traversals or the inorder and postorder traversals, we can build the BST.
+> If the BST is balanced, then in the inorder traversal, we can observe the Root falls at mid of the list of the nodes.
+> In preorder the Root always comes 1st.
+> In the post order, the Root always comes last.
+----------------------------------------------------------
+
+public class Node {
+	private Node left;
+	private int data;
+	private Node right;
+	private static Scanner scanner;
+	
+	static {
+		scanner = new Scanner(System.in);
+	}
+	
+	public static Scanner getScanner() {
+		return scanner;
+	}
+	
+	public static void closeScanner() {
+		scanner.close();
+	}
+	
+	public Node() {
+		super();
+		System.out.print("Enter data of the new Node: ");
+		data = scanner.nextInt();
+	}
+
+	public Node(Node left, int data, Node right) {
+		super();
+		this.left = left;
+		this.data = data;
+		this.right = right;
+	}
+
+	public Node getLeft() {
+		return left;
+	}
+
+	public void setLeft(Node left) {
+		this.left = left;
+	}
+
+	public int getData() {
+		return data;
+	}
+
+	public void setData(int data) {
+		this.data = data;
+	}
+
+	public Node getRight() {
+		return right;
+	}
+
+	public void setRight(Node right) {
+		this.right = right;
+	}
+
+	@Override
+	public String toString() {
+		return "Node [left=" + left + ", data=" + data + ", right=" + right + "]";
+	}
+}
+--------------------------
+
+public class BST {
+
+	private Node root; // this holds reference value of the root node. Thus it points to the BST
+
+	public void addNode() {
+		Node newNode = new Node();
+		
+		if(root == null) { // if tree is empty, then the new-node becomes root of the root
+			root = newNode;
+			return;
+		}
+		// if the tree is not empty, then we must traverse the tree in the proper path and attach the new node as leaf node.
+		Node temp1 = root;
+		Node temp2 = null;
+		while(temp1 != null) {
+			temp2 = temp1;
+			if(newNode.getData() < temp1.getData())
+				temp1 = temp1.getLeft();
+			else
+				temp1 = temp1.getRight();
+		}
+		if(newNode.getData() < temp2.getData())
+			temp2.setLeft(newNode);
+		else
+			temp2.setRight(newNode);
+	}
+	
+	public void addNodeRecursively(Node root, Node newNode) {
+		if(root == null) {
+			root = newNode;
+			return;
+		}
+		if(newNode.getData() < root.getData())
+			addNodeRecursively(root.getLeft(), newNode);
+		else
+			addNodeRecursively(root.getRight(), newNode);
+	}
+
+	public void preOrder(Node root) {
+		if(root != null) {
+			System.out.print(root.getData() + "  ");
+			preOrder(root.getLeft());
+			preOrder(root.getRight());
+		}
+	}
+
+	public void inOrder(Node root) {
+		if(root != null) {
+			inOrder(root.getLeft());
+			System.out.print(root.getData() + "  ");
+			inOrder(root.getRight());
+		}
+	}
+
+	public void postOrder(Node root) {
+		if(root != null) {
+			postOrder(root.getLeft());
+			postOrder(root.getRight());
+			System.out.print(root.getData() + "  ");
+		}
+	}
+
+	public static void main(String[] args) {
+		int choice = 0;
+		BST bst = new BST();
+		Scanner scanner = Node.getScanner();
+		do {
+			System.out.print("\n1:Add 2:Inorder 3:PreOrder 4:PostOrder 5:Exit \t Your choice? ");
+			choice = scanner.nextInt();
+			switch(choice) {
+			case 1 : bst.addNode(); break;
+			case 2 : bst.inOrder(bst.root); break;
+			case 3 : bst.preOrder(bst.root); break;
+			case 4 : bst.postOrder(bst.root); break;
+			case 5 : System.out.println("End of Program");
+					 choice = 0;
+					 break;
+			default: System.out.println("Invalid choice enetered");
+			}
+		}while(choice != 0);
+		Node.closeScanner();
+	}
+}
+-------------------------------
+
