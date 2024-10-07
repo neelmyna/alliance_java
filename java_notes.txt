@@ -624,7 +624,6 @@ Traversals:
 > In preorder the Root always comes 1st.
 > In the post order, the Root always comes last.
 ----------------------------------------------------------
-
 public class Node {
 	private Node left;
 	private int data;
@@ -686,7 +685,6 @@ public class Node {
 	}
 }
 --------------------------
-
 public class BST {
 
 	private Node root; // this holds reference value of the root node. Thus it points to the BST
@@ -771,4 +769,104 @@ public class BST {
 	}
 }
 -------------------------------
+Florist Greedy Technique Problem:
+The problem is related to a greedy florist. usually when someone has repeating customer, seller should reduce the price. but as the florist is greedy he will charge more if someone buys more than 1 flower from him.
+for the first flower he will keep the original price which is (0+1)Xoriginal price, for the next number of flowers he will twice, thrice the price of original meaning the price of (1+1)Xoriginal price, (2+1)Xoriginal price and so on.
+
+If there are a group of friends trying to buy a number of flowers, we need to minimize the total price within with all the flowers can be bought.
+
+as the price increases after each purchase for a single friend, it would be better to buy the costly flowers first so that the price does not hike as much as buying cheap flowers at twice/thrice at rate.
+to clarify: 2 flowers has price of 3, 7 respectively.
+if we buy 3 first at original price and 7 second at twice of its price then total is:
+3+7*2=17
+where as if we buy 7 first at original price and 3 second at twice of its price then total is:
+3*2+7=13
+
+for this solution, we divide the most costly flowers to all the friends first at original price. after that, the lesser costly flowers are divided into all friends again at twice price. then the rest of the least costly flowers are divided to all friends at thrice the price and so on.
+
+findMinimumCost(K, C):
+	c.sort(reverse = True)
+	total_cost = 0
+	for i from 0 to c.length-1 do:
+		total_cost += n(i / k+1) * c[i]
+	return total_cost
+
+N is the number of flowers
+K is the number of friends
+--------------------------------------------------
+1
+2
+5
+10
+20
+
+67
+20 - 3
+5  - 1
+2  - 1
+------------------------------------------------------------
+Can we put main() in an abstract class and able to execute the program?
+YES IS THE ANSWER
+
+https://tinyurl.com/fbtuesday
+
+
+int[] array[];
+One reference to a array of type int[][] (2D array)
+array = new int[4][];  // An array of 3 references of type int[]
+array[0] is a refrence of type int[]
+
+array[0] = new int[4];
+array[2] = new int[3];
+array[3] = new int[1];
+
+5 references are created
+One reference is in Stack area
+4 references are in the array object in heap (these are the references to the 1D arrays (rows) in heap)
+There are totally 8 primitive values.
+All values are zeroes, because all objects in java have default values.
+The 2nd reference in the array of references is null. Thus the 2nd row in the 2D array is empty.
+Also it is very interesting to see that different rows/arrays are of different sizes.
+-----------------------------------------------------------------
+int[] a = new int[10] {1, 2, 4, 5, 9};
+a[5] is what ?
+
+Error in line #831
+When ever we initialize array elements, we must not define its size.
+The size is always implicitly deduced while initalizing an array.
+--------------------------------------------
+String s1 = "nithin";
+String s2 = "nithin";
+String s3 = new String("nithin");
+
+How many copies of "nithin" object is there in heap??
+Answer: 2
+One inside String Pool and One outside string pool
+
+
+if(s1 == s2) // compares reference values
+	s.o.p("hi");
+else
+	s.o.p("hello");
+
+if(s1 == s3)
+	s.o.p("hi");
+else
+	s.o.p("hello");
+	
+if(s1.equals(s3))  // case sensitive comparision of string objects
+	s.o.p("hi");
+else
+	s.o.p("hello");
+
+if(s1.equalsIgnoreCase("NithiN"))
+	s.o.p("hi");
+else
+	s.o.p("hello");
+
+s1 = "mysuru";
+for(int i = 0, j = 65; i < s1.length(); i++, j++) {
+	s1 = s1 + char(j);
+s.o.p(s1);
+
 
