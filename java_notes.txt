@@ -769,7 +769,6 @@ public class BST {
 	}
 }
 -------------------------------
-<<<<<<< HEAD
 DAY6 08-10-2024 TUESDAY
 
 DB Connectivity and CRUD operations mini project completion
@@ -804,7 +803,6 @@ int findMaximumData(Node root) {
 	return maxData;
 }
 --------------------------------------------
-=======
 Florist Greedy Technique Problem:
 The problem is related to a greedy florist. usually when someone has repeating customer, seller should reduce the price. but as the florist is greedy he will charge more if someone buys more than 1 flower from him.
 for the first flower he will keep the original price which is (0+1)Xoriginal price, for the next number of flowers he will twice, thrice the price of original meaning the price of (1+1)Xoriginal price, (2+1)Xoriginal price and so on.

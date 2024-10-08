@@ -1,0 +1,424 @@
+Java Collections:
+
+1. When we define the classes such as Stack, Queue etc. then the data we store in them is fixed.
+Mean to say, if the data is of type int, then we must create a new class for double data type, and so on.
+
+2. The size of the DS (Stack, Queue etc.) is fixed in the program (constructor/instance initialer or in the instance variable declaration) which is not a good idea.
+
+3. All the necessary methods have to be written by us. We may forget few of them.
+
+4. The synchronization and exception handling may also be required to be taken care.
+
+Howver, in Java we have collections which is similar to C++ STL where all the 4 issue mentioned above are taken care of.
+
+1. Generics helps us to create a DS (Stack Queue LL Tree etc) to store any type of data.
+2. The Collections can grow and shrink dynamically.
+3. All the necessary methods are available within the Collection classes thus we need not have to do the re-work of upgrading/enhancing these classes
+4. Most of the collection classes are Thread safe and also extend Exception classes.
+
+NOTE: We can store only Objects in a collection. We cannot put primitive data into the collections.
+------------------------------------------------------------
+What is Collection in Java?
+------------------------------------------------------------
+A Collection represents a single unit of objects, i.e., a group.
+------------------------------------------------------------
+What is a framework in Java?
+	It provides readymade architecture.
+	It represents a set of classes and interfaces.
+	It is optional to use.
+------------------------------------------------------------
+What is Collection framework?
+	The Collection framework represents a unified architecture for storing and manipulating a group of objects. 
+	It has:
+	1. Interfaces and its implementations, i.e., classes
+	2. Algorithms
+------------------------------------------------------------
+Collection Interface 
+------------------------------------------------------------
+	1. Foundation for all collection interfaces 
+------------------------------------------------------------
+Some Methods of Collection interface
+	[SEE end of this file to see all methods]
+------------------------------------------------------------
+	1	public boolean add(E e)	It is used to insert an element in this collection.
+	3	public boolean remove(Object element)	It is used to delete an element from the collection.
+	7	public int size()	It returns the total number of elements in the collection.
+	8	public void clear()	It removes the total number of elements from the collection.
+	11	public Iterator iterator()	It returns an iterator.
+	12	public Object[] toArray()	It converts collection into array.
+	14	public boolean isEmpty()	It checks if collection is empty.
+------------------------------------------------------------
+Iterator interface
+------------------------------------------------------------
+	1. Iterator interface provides the facility of iterating the elements in a forward direction only.
+------------------------------------------------------------
+Methods of Iterator interface
+------------------------------------------------------------
+	No.	Method	Description
+	1	public boolean hasNext()	It returns true if the iterator has more elements otherwise it returns false.
+	2	public Object next()		It returns the element and moves the cursor pointer to the next element.
+	3	public void remove()		It removes the last elements returned by the iterator. It is less used.
+------------------------------------------------------------
+Iterable Interface
+------------------------------------------------------------
+	1. The Iterable interface is the root interface for all the collection classes. 
+	2. The Collection interface extends the Iterable interface and therefore all the subclasses of Collection interface also implement the Iterable interface.
+------------------------------------------------------------
+	Iterable contains only one abstract method. i.e.,
+------------------------------------------------------------
+	1. Iterator<T> iterator() 	-	It returns the iterator over the elements of type T.
+------------------------------------------------------------
+List Interface Examples
+------------------------------------------------------------
+	To instantiate the List interface, we must use :
+------------------------------------------------------------
+		List <data-type> list1= new ArrayList();  
+		List <data-type> list2 = new LinkedList();  
+		List <data-type> list3 = new Vector();  
+		List <data-type> list4 = new Stack();  
+------------------------------------------------------------
+ArrayList
+	The ArrayList class implements the List interface. 
+	It uses a dynamic array to store the duplicate element of different data types. 
+	The ArrayList class maintains the insertion order and is non-synchronized. 
+	The elements stored in the ArrayList class can be randomly accessed. 
+------------------------------------------------------------
+	import java.util.*;  
+	class TestJavaCollection1{  
+		public static void main(String args[]){  
+			ArrayList<String> list=new ArrayList<String>();//Creating arraylist  
+			list.add("Ravi");//Adding object in arraylist  
+			list.add("Vijay");  
+			list.add("Ravi");  
+			list.add("Ajay");  
+			//Traversing list through Iterator  
+			Iterator itr=list.iterator();  
+			while(itr.hasNext()){  
+				System.out.println(itr.next());  
+			}  
+		}  
+	}  
+Output:
+	Ravi
+	Vijay
+	Ravi
+	Ajay		
+------------------------------------------------------------	
+LinkedList
+------------------------------------------------------------
+	1. LinkedList implements the Collection interface. 
+	2. It uses a doubly linked list internally to store the elements. 
+	3. It can store the duplicate elements. 
+	4. It maintains the insertion order and is not synchronized. 
+	5. In LinkedList, the manipulation is fast because no shifting is required.
+------------------------------------------------------------	
+	import java.util.*;  
+	public class TestJavaCollection2{  
+		public static void main(String args[]){  
+			LinkedList<String> al=new LinkedList<String>();  
+			al.add("Ravi");  
+			al.add("Vijay");  
+			al.add("Ravi");  
+			al.add("Ajay");  
+			Iterator<String> itr=al.iterator();  
+			while(itr.hasNext()){  
+				System.out.println(itr.next());  
+			}  
+		}  
+	}  
+Output:
+
+Ravi
+Vijay
+Ravi
+Ajay	
+------------------------------------------------------------
+Vector
+------------------------------------------------------------
+	1. Vector uses a dynamic array to store the data elements. 
+	2. It is similar to ArrayList. 
+	3. However, It is synchronized and contains many methods that are not the part of Collection framework.
+------------------------------------------------------------
+	import java.util.*;  
+	public class TestJavaCollection3{  
+		public static void main(String args[]){  
+			Vector<String> v=new Vector<String>();  
+			v.add("Ayush");  
+			v.add("Amit");  
+			v.add("Ashish");  
+			v.add("Garima");  
+			Iterator<String> itr=v.iterator();  
+			while(itr.hasNext()){  
+				System.out.println(itr.next());  
+			}  
+		}  
+	}  
+Output:
+
+Ayush
+Amit
+Ashish
+Garima	
+------------------------------------------------------------
+Stack
+------------------------------------------------------------
+	1. The stack is the subclass of Vector. 
+	2. It implements the last-in-first-out data structure, i.e., Stack. 
+	3. The stack contains all of the methods of Vector class and 
+	4. also provides its methods like 
+		boolean push(), 
+		boolean peek(), 
+		boolean push(object o), 
+		which defines its properties.
+------------------------------------------------------------
+	import java.util.*;  
+	public class TestJavaCollection4{  
+		public static void main(String args[]){  
+			Stack<String> stack = new Stack<String>();  
+			stack.push("Ayush");  
+			stack.push("Garvit");  
+			stack.push("Amit");  
+			stack.push("Ashish");  
+			stack.push("Garima");  
+			stack.pop();  
+			Iterator<String> itr=stack.iterator();  
+			while(itr.hasNext()){  
+				System.out.println(itr.next());  
+			}  
+		}  
+	}
+------------------------------------------------------------
+Output:
+
+Ayush
+Garvit
+Amit
+Ashish	
+------------------------------------------------------------
+****Assignment:**** Menu driven program using java stack 
+------------------------------------------------------------	
+Queue Interface
+------------------------------------------------------------
+	1. Queue interface maintains the first-in-first-out order. 
+	2. It can be defined as an ordered list that is used to hold the elements which are about to be processed. 
+	3. There are various classes like 
+		PriorityQueue, 
+		Deque, and 
+		ArrayDeque 
+		which implements the Queue interface.
+------------------------------------------------------------
+Queue interface can be instantiated as:
+	1. Queue<String> q1 = new PriorityQueue();  
+	2. Queue<String> q2 = new ArrayDeque();  		
+------------------------------------------------------------
+PriorityQueue
+------------------------------------------------------------
+	1. The PriorityQueue class implements the Queue interface. 
+	2. It holds the elements or objects which are to be processed by their priorities. 
+	3. PriorityQueue doesn't allow null values to be stored in the queue.
+------------------------------------------------------------
+	import java.util.*;  
+	public class TestJavaCollection5{  
+		public static void main(String args[]){  
+			PriorityQueue<String> queue=new PriorityQueue<String>();  
+			queue.add("Amit Sharma");  
+			queue.add("Vijay Raj");  
+			queue.add("JaiShankar");  
+			queue.add("Raj");  
+			System.out.println("head:"+queue.element());  
+			System.out.println("head:"+queue.peek());  
+			
+			System.out.println("iterating the queue elements:");  
+			Iterator itr=queue.iterator();  
+			while(itr.hasNext()){  
+				System.out.println(itr.next());  
+			}  
+			queue.remove();  
+			queue.poll();  
+			
+			System.out.println("after removing two elements:");  
+			Iterator<String> itr2=queue.iterator();  
+			while(itr2.hasNext()){  
+				System.out.println(itr2.next());  
+			}  
+		}  
+	}  
+Output:
+
+head:Amit Sharma
+head:Amit Sharma
+iterating the queue elements:
+Amit Sharma
+Raj
+JaiShankar
+Vijay Raj
+after removing two elements:
+Raj
+Vijay Raj	
+------------------------------------------------------------
+Deque Interface
+------------------------------------------------------------
+	1. Deque interface extends the Queue interface. 
+	2. In Deque, we can remove and add the elements from both the side. 
+	3. Deque stands for a double-ended queue which enables us to perform the operations at both the ends.
+------------------------------------------------------------
+Deque can be instantiated as:
+
+	Deque d = new ArrayDeque();  
+------------------------------------------------------------
+ArrayDeque
+	1. ArrayDeque class implements the Deque interface. 
+	2. It facilitates us to use the Deque. 
+	3. Unlike queue, we can add or delete the elements from both the ends.
+	4. ArrayDeque is faster than ArrayList and Stack and has no capacity restrictions.
+------------------------------------------------------------
+import java.util.*;  
+public class TestJavaCollection6{  
+	public static void main(String[] args) {  
+		//Creating Deque and adding elements  
+		Deque<String> deque = new ArrayDeque<String>();  
+		deque.add("Gautam");  
+		deque.add("Karan");  
+		deque.add("Ajay");  
+		//Traversing elements  
+		for (String str : deque) {  
+			System.out.println(str);  
+		}  
+	}  
+}  
+Output:
+
+Gautam
+Karan
+Ajay
+------------------------------------------------------------
+Set Interface
+------------------------------------------------------------
+	1. Set Interface in Java is present in java.util package. 
+	2. It extends the Collection interface. 
+	3. It represents the unordered set of elements which doesn't allow us to store the duplicate items. 
+	4. We can store at most one null value in Set. Set is implemented by HashSet, LinkedHashSet, and TreeSet.
+------------------------------------------------------------
+Set can be instantiated as:
+------------------------------------------------------------
+	Set<data-type> s1 = new HashSet<data-type>();  
+	Set<data-type> s2 = new LinkedHashSet<data-type>();  
+	Set<data-type> s3 = new TreeSet<data-type>();  
+------------------------------------------------------------	
+HashSet
+	1. HashSet class implements Set Interface. 
+	2. It represents the collection that uses a hash table for storage. 
+	3. Hashing is used to store the elements in the HashSet. It contains unique items.
+------------------------------------------------------------
+	import java.util.*;  
+	public class TestJavaCollection7{  
+		public static void main(String args[]){  
+			//Creating HashSet and adding elements  
+			HashSet<String> set=new HashSet<String>();  
+			set.add("Ravi");  
+			set.add("Vijay");  
+			set.add("Ravi");  
+			set.add("Ajay");  
+			
+			//Traversing elements  
+			Iterator<String> itr=set.iterator();  
+			while(itr.hasNext()){  
+				System.out.println(itr.next());  
+			}  
+		}  
+	}  
+Output:
+
+Vijay
+Ravi
+Ajay
+------------------------------------------------------------		
+LinkedHashSet
+------------------------------------------------------------
+	1. LinkedHashSet class represents the LinkedList implementation of Set Interface. 
+	2. It extends the HashSet class and implements Set interface. 
+	3. Like HashSet, It also contains unique elements. 
+	4. It maintains the insertion order and permits null elements.
+------------------------------------------------------------
+	import java.util.*;  
+	public class TestJavaCollection8{  
+		public static void main(String args[]){  
+			LinkedHashSet<String> set=new LinkedHashSet<String>();  
+			set.add("Ravi");  
+			set.add("Vijay");  
+			set.add("Ravi");  
+			set.add("Ajay");  
+			
+			Iterator<String> itr=set.iterator();  
+			while(itr.hasNext()){  
+				System.out.println(itr.next());  
+			}  
+		}  
+	}  	
+	
+Output:
+
+Ravi
+Vijay
+Ajay
+------------------------------------------------------------
+SortedSet Interface
+	1. SortedSet is the alternate of Set interface that provides a total ordering on its elements. 
+	2. The elements of the SortedSet are arranged in the increasing (ascending) order. 
+	3. The SortedSet provides the additional methods that inhibit the natural ordering of the elements.
+------------------------------------------------------------
+The SortedSet can be instantiated as:
+------------------------------------------------------------
+	SortedSet<data-type> set = new TreeSet(); 
+------------------------------------------------------------ 	
+TreeSet
+	1. Java TreeSet class implements the Set interface that uses a tree for storage. 
+	2. Like HashSet, TreeSet also contains unique elements. 
+	3. However, the access and retrieval time of TreeSet is quite fast. 
+	4. The elements in TreeSet stored in ascending order.
+------------------------------------------------------------
+	import java.util.*;  
+	public class TestJavaCollection9{  
+		public static void main(String args[]){  
+			//Creating and adding elements  
+			TreeSet<String> set=new TreeSet<String>();  
+			set.add("Ravi");  
+			set.add("Vijay");  
+			set.add("Ravi");  
+			set.add("Ajay");  
+			//traversing elements  
+			Iterator<String> itr=set.iterator();  
+			while(itr.hasNext()){  
+				System.out.println(itr.next());  
+			}  
+		}  
+	} 
+Output:
+
+Ajay
+Ravi
+Vijay	
+------------------------------------------------------------
+------------------------------------------------------------
+Methods of Collection interface
+------------------------------------------------------------
+	1	public boolean add(E e)	It is used to insert an element in this collection.
+	2	public boolean addAll(Collection<? extends E> c)	It is used to insert the specified collection elements in the invoking collection.
+	3	public boolean remove(Object element)	It is used to delete an element from the collection.
+	4	public boolean removeAll(Collection<?> c)	It is used to delete all the elements of the specified collection from the invoking collection.
+	5	default boolean removeIf(Predicate<? super E> filter)	It is used to delete all the elements of the collection that satisfy the specified predicate.
+	6	public boolean retainAll(Collection<?> c)	It is used to delete all the elements of invoking collection except the specified collection.
+	7	public int size()	It returns the total number of elements in the collection.
+	8	public void clear()	It removes the total number of elements from the collection.
+	9	public boolean contains(Object element)	It is used to search an element.
+	10	public boolean containsAll(Collection<?> c)	It is used to search the specified collection in the collection.
+	11	public Iterator iterator()	It returns an iterator.
+	12	public Object[] toArray()	It converts collection into array.
+	13	public <T> T[] toArray(T[] a)	It converts collection into array. Here, the runtime type of the returned array is that of the specified array.
+	14	public boolean isEmpty()	It checks if collection is empty.
+	15	default Stream<E> parallelStream()	It returns a possibly parallel Stream with the collection as its source.
+	16	default Stream<E> stream()	It returns a sequential Stream with the collection as its source.
+	17	default Spliterator<E> spliterator()	It generates a Spliterator over the specified elements in the collection.
+	18	public boolean equals(Object element)	It matches two collections.
+	19	public int hashCode()	It returns the hash code number of the collection.
+------------------------------------------------------------	
