@@ -75,6 +75,8 @@ public class BST {
 		else
 			return searchNode(root.getRight(), key, count+1);
 	}
+
+	
 	
 	public boolean deleteNode(Node root, int data) {
 		boolean result = false;
