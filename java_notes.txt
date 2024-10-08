@@ -588,7 +588,6 @@ public class Node {
 	}
 }
 --------------------------
-
 public class BST {
 
 	private Node root; // this holds reference value of the root node. Thus it points to the BST
@@ -673,3 +672,37 @@ public class BST {
 	}
 }
 -------------------------------
+DAY6 08-10-2024 TUESDAY
+
+DB Connectivity and CRUD operations mini project completion
+Deletion of node from BST
+Stream class/API
+Hashing
+Problem Solving on Dynamic Programming
+
+How to find the min value in a BST ?
+
+Put the below code in BST class
+
+int findMinimumData(Node root) {
+	int minData = root.getData();
+	while(root.getLeft() != null) {
+		minData = root.getLeft().getData();
+		root = root.getLeft();
+	}
+	return minData;
+}
+--------------------------------------------
+How to find the max value in a BST ?
+
+Put the below code in BST class
+
+int findMaximumData(Node root) {
+	int maxData = root.getData();
+	while(root.getRightt() != null) {
+		maxData = root.getRightt().getData();
+		root = root.getRightt();
+	}
+	return maxData;
+}
+--------------------------------------------
